@@ -1,0 +1,165 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* SEND Brand Kit - Custom Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: Inter, var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  
+  /* SEND Brand Colors */
+  --color-paper: var(--paper);
+  --color-deep-ink: var(--deep-ink);
+  --color-charcoal: var(--charcoal);
+  --color-alice-blue: var(--alice-blue);
+  --color-burgundy: var(--burgundy);
+}
+
+:root {
+  /* SEND Brand Kit - Color Palette */
+  --paper: #FDFCFA;
+  --deep-ink: #1E2A36;
+  --charcoal: #39404B;
+  --alice-blue: #ECF4F7;
+  --burgundy: #910029;
+  
+  /* shadcn/ui theme - mapped to SEND colors */
+  --radius: 0.625rem;
+  --background: var(--paper);
+  --foreground: var(--deep-ink);
+  --card: var(--paper);
+  --card-foreground: var(--deep-ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--deep-ink);
+  --primary: var(--burgundy);
+  --primary-foreground: var(--paper);
+  --secondary: var(--alice-blue);
+  --secondary-foreground: var(--deep-ink);
+  --muted: var(--alice-blue);
+  --muted-foreground: var(--charcoal);
+  --accent: var(--alice-blue);
+  --accent-foreground: var(--deep-ink);
+  --destructive: #dc2626;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: var(--burgundy);
+  --chart-1: #f97316;
+  --chart-2: #3b82f6;
+  --chart-3: #8b5cf6;
+  --chart-4: #10b981;
+  --chart-5: #f59e0b;
+  --sidebar: var(--paper);
+  --sidebar-foreground: var(--deep-ink);
+  --sidebar-primary: var(--burgundy);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: var(--alice-blue);
+  --sidebar-accent-foreground: var(--deep-ink);
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: var(--burgundy);
+}
+
+.dark {
+  --background: var(--deep-ink);
+  --foreground: var(--paper);
+  --card: var(--charcoal);
+  --card-foreground: var(--paper);
+  --popover: var(--charcoal);
+  --popover-foreground: var(--paper);
+  --primary: var(--burgundy);
+  --primary-foreground: var(--paper);
+  --secondary: #2d3748;
+  --secondary-foreground: var(--paper);
+  --muted: #2d3748;
+  --muted-foreground: #94a3b8;
+  --accent: #2d3748;
+  --accent-foreground: var(--paper);
+  --destructive: #ef4444;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.15);
+  --ring: var(--burgundy);
+  --chart-1: #f97316;
+  --chart-2: #3b82f6;
+  --chart-3: #8b5cf6;
+  --chart-4: #10b981;
+  --chart-5: #f59e0b;
+  --sidebar: var(--charcoal);
+  --sidebar-foreground: var(--paper);
+  --sidebar-primary: var(--burgundy);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: #2d3748;
+  --sidebar-accent-foreground: var(--paper);
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: var(--burgundy);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  
+  /* Typography System */
+  h1, h2, .heading-primary {
+    font-family: 'Futura', 'Futura PT', Inter, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  
+  h3, h4, h5, h6, .heading-secondary {
+    font-family: Inter, sans-serif;
+    font-weight: 600;
+  }
+  
+  .font-accent {
+    font-family: 'Native Record', Inter, sans-serif;
+  }
+  
+  .eyebrow {
+    font-family: 'Native Record', Inter, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+}
