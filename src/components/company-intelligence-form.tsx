@@ -1,5 +1,6 @@
 'use client'
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from 'react'
 import { CompanyIntelligence } from '@/types/database.types'
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card'

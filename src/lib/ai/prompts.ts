@@ -2,7 +2,7 @@
  * AI Prompts for company research and copy generation
  */
 
-import { CompanyIntelligence } from '@/types/database.types'
+import { CompanyIntelligence, PreviewLead } from '@/types/database.types'
 
 export function generatePreviewLeadPrompt(companyData: CompanyIntelligence): string {
   return `You are a world-class B2B researcher and outbound specialist. Using the following ICP and company intelligence, generate ONE highly representative lead profile for personalized outbound preview. The lead should match the ICP fields, contain realistic personal and company data, and include recent company activity for contextual hooks.
@@ -29,7 +29,7 @@ Return ONLY valid JSON (no markdown formatting):
 }`
 }
 
-export function generateCopySynthesisPrompt(companyData: CompanyIntelligence, previewLead: any): string {
+export function generateCopySynthesisPrompt(companyData: CompanyIntelligence, previewLead: PreviewLead): string {
   return `You are an expert outbound copywriter. Based on the sender company, ICP, and preview lead context below, generate a comprehensive JSON object containing creative cold email snippets for all categories: openings, hooks, arguments (by framework), CTAs, urgency elements, PS lines, social proof, and customizable variables.
 
 Use {{prospect_name}}, {{prospect_company}}, {{recent_activity}}, etc. in all snippets for later personalization. Do NOT assemble entire emails—return only mapped snippets.
