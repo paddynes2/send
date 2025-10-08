@@ -162,8 +162,8 @@ export function CopyPreview({ config, copyVariations, previewLead, companyData }
           </h4>
           <ul className="space-y-1 text-xs text-charcoal">
             <li>• Keep emails under 150 words for best response rates</li>
-            <li>• Micro CTAs (like "Thoughts?") get 2x more replies</li>
-            <li>• Personalization beyond {{'{firstName}'}} increases engagement by 40%</li>
+            <li>• Micro CTAs (like &quot;Thoughts?&quot;) get 2x more replies</li>
+            <li>• Personalization beyond {'{'}firstName{'}'} increases engagement by 40%</li>
             <li>• Test 2-3 variations per campaign for optimal results</li>
           </ul>
         </CardContent>
