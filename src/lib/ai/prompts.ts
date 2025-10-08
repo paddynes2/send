@@ -2,6 +2,117 @@
  * AI Prompts for company research and copy generation
  */
 
+import { CompanyIntelligence } from '@/types/database.types'
+
+export function generatePreviewLeadPrompt(companyData: CompanyIntelligence): string {
+  return `You are a world-class B2B researcher and outbound specialist. Using the following ICP and company intelligence, generate ONE highly representative lead profile for personalized outbound preview. The lead should match the ICP fields, contain realistic personal and company data, and include recent company activity for contextual hooks.
+
+ICP:
+${JSON.stringify(companyData.icp, null, 2)}
+
+Sender Company:
+${JSON.stringify({
+  name: companyData.companyName,
+  industry: companyData.companyDetails.industry,
+  usp: companyData.companyDetails.usp
+}, null, 2)}
+
+Return ONLY valid JSON (no markdown formatting):
+{
+  "firstName": "string",
+  "lastName": "string",
+  "company": "string",
+  "title": "string",
+  "industry": "string",
+  "companySize": "string",
+  "recentActivity": "string (e.g., 'Raised $50M Series B, hiring SDRs, expanded to Europe')"
+}`
+}
+
+export function generateCopySynthesisPrompt(companyData: CompanyIntelligence, previewLead: any): string {
+  return `You are an expert outbound copywriter. Based on the sender company, ICP, and preview lead context below, generate a comprehensive JSON object containing creative cold email snippets for all categories: openings, hooks, arguments (by framework), CTAs, urgency elements, PS lines, social proof, and customizable variables.
+
+Use {{prospect_name}}, {{prospect_company}}, {{recent_activity}}, etc. in all snippets for later personalization. Do NOT assemble entire emails—return only mapped snippets.
+
+SENDER CONTEXT:
+${JSON.stringify({
+  companyName: companyData.companyName,
+  tagline: companyData.tagline,
+  usp: companyData.companyDetails.usp,
+  industry: companyData.companyDetails.industry,
+  copyHooks: companyData.copyHooks,
+  messagingAngles: companyData.messagingAngles
+}, null, 2)}
+
+ICP CONTEXT:
+${JSON.stringify(companyData.icp, null, 2)}
+
+PREVIEW LEAD:
+${JSON.stringify(previewLead, null, 2)}
+
+Return ONLY valid JSON (no markdown formatting) in this EXACT structure:
+{
+  "subjects": {
+    "curiosity": ["string", "string", "string"],
+    "direct": ["string", "string", "string"],
+    "personal": ["string", "string", "string"],
+    "urgency": ["string", "string"],
+    "pattern_break": ["string", "string"]
+  },
+  "openings": {
+    "observation": ["string", "string", "string"],
+    "problem": ["string", "string", "string"],
+    "trigger_event": ["string", "string"],
+    "question": ["string", "string", "string"]
+  },
+  "pain_points": {
+    "competitive": ["string", "string"],
+    "scaling": ["string", "string"],
+    "efficiency": ["string", "string"]
+  },
+  "arguments": {
+    "PAS": {
+      "data_driven": ["string", "string"],
+      "emotional": ["string", "string"]
+    },
+    "AIDA": {
+      "data_driven": ["string", "string"],
+      "emotional": ["string", "string"]
+    },
+    "BAB": {
+      "data_driven": ["string", "string"],
+      "emotional": ["string", "string"]
+    }
+  },
+  "social_proof": {
+    "none": [""],
+    "similar": ["string", "string"],
+    "impressive": ["string", "string"],
+    "results": ["string", "string"]
+  },
+  "ctas": {
+    "micro": ["Thoughts?", "Make sense?", "Interested?"],
+    "small": ["Worth a chat?", "Open to learning more?"],
+    "medium": ["15 minutes to discuss?", "Quick call this week?"],
+    "large": ["30 minute demo?", "Full walkthrough?"]
+  },
+  "ps_lines": {
+    "none": [""],
+    "personal": ["string", "string"],
+    "urgency": ["string", "string"],
+    "value_add": ["string", "string"]
+  },
+  "urgency_elements": {
+    "none": [""],
+    "gentle": ["when you're ready", "at your convenience"],
+    "moderate": ["this quarter", "in the coming weeks"],
+    "high": ["this week", "before Friday"]
+  }
+}
+
+Make sure ALL strings include appropriate placeholders like {{prospect_name}}, {{prospect_company}}, {{recent_activity}}, etc.`
+}
+
 export function generateCompanyResearchPrompt(domain: string): string {
   return `You are an expert Go-to-Market (GTM) Strategist and Market Research Analyst with powerful, real-time access to web data. Your primary goal is to perform a deep analysis of a given company domain and synthesize your findings into a structured, actionable GTM profile. You must be analytical, precise, and infer information logically. Your output must be a single, valid JSON object and nothing else. Do not wrap the JSON in markdown backticks.
 

@@ -184,5 +184,6 @@ export interface PreviewLead {
   company: string
   title: string
   industry: string
+  companySize: string
   recentActivity: string
 }
